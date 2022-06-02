@@ -1,0 +1,22 @@
+.contact-list {
+  display: flex;
+	justify-content: center;
+	
+  &__elem {
+		&:not(:last-child) {
+			margin: 0 15px 0 0;
+		}
+  }
+
+  &__link {
+    svg {
+      width: 35px;
+      height: 35px;
+			border-radius: 3px;
+
+			&:hover {
+				transform: scale(1.3);
+			}
+    }
+  }
+}

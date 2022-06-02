@@ -1,0 +1,16 @@
+svg {
+  position: relative;
+}
+
+circle:nth-of-type(1) { fill: #ffffff; }
+circle:nth-of-type(2) { fill: #37cefc; }
+circle:nth-of-type(3) { fill: #0e81ee; }
+circle:nth-of-type(4) { fill: #0e25ee; }
+
+#clackers {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
