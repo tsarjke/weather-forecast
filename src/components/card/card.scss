@@ -1,0 +1,132 @@
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__list {
+    width: 48%;
+    padding: 10px;
+    background-color: #7291e4;
+    border-radius: 5px;
+    margin: 0 2% 10px 0;
+		border: 1px solid #1b198f;
+
+		@media (min-width: 768px) {
+			width: 30%;
+			margin: 0 3.33% 20px 0;
+		}
+
+		@media (min-width: 1024px) {
+			width: 23%;
+			margin: 0 2% 20px 0;
+		}
+  }
+
+  &__weekday {
+    font-size: 1.3rem;
+		margin: 0 0 5px 0;
+
+    &_r {
+      color: #f00;
+    }
+
+		@media (min-width: 440px) {
+			font-size: 1.4rem;
+		}
+
+		@media (min-width: 768px) {
+			font-size: 1.5rem;
+		}
+
+		@media (min-width: 1440px) {
+			font-size: 1.7rem;
+		}
+  }
+
+  &__date {
+    display: flex;
+		margin: 0 0 5px 0;
+
+		@media (min-width: 440px) {
+			font-size: 1rem;
+		}
+
+		@media (min-width: 1440px) {
+			font-size: 1.2rem;
+		}
+  }
+
+  &__time {
+    margin: 0 5px 0 0;
+  }
+
+  &__date-month {
+  }
+
+  &__icon {
+		margin: 0 0 5px 0;
+    img {
+			display: block;
+      max-width: 80%;
+			margin: 0 auto;
+
+			@media (min-width: 768px) {
+				width: 70%;
+			}
+
+			@media (min-width: 1024px) {
+				width: 60%;
+			}
+
+			@media (min-width: 1440px) {
+				width: 50%;
+			}
+    }
+  }
+
+  &__desc {
+    text-align: center;
+		margin: 0 0 5px 0;
+
+		@media (min-width: 440px) {
+			font-size: 1rem;
+		}
+
+		@media (min-width: 1440px) {
+			font-size: 1.2rem;
+		}
+  }
+
+  &__temp {
+    text-align: center;
+  }
+
+  &__temp-real {
+    font-size: 1.6rem;
+		margin: 0 0 5px 0;
+
+		@media (min-width: 440px) {
+			font-size: 1.8rem;
+		}
+
+		@media (min-width: 768px) {
+			font-size: 1.9rem;
+		}
+
+		@media (min-width: 768px) {
+			font-size: 2.1rem;
+		}
+  }
+
+  &__feels-like {
+    color: #555;
+
+		@media (min-width: 440px) {
+			font-size: 1rem;
+		}
+
+		@media (min-width: 1440px) {
+			font-size: 1.2rem;
+		}
+  }
+}

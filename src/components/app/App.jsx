@@ -8,6 +8,7 @@ const App = () => (
     <header className="header">
       <div className="header__content">
         <h1 className="header__title">Weather forecast</h1>
+        <h4 className="header__subtitle">for the day</h4>
       </div>
     </header>
     <main>

@@ -2,28 +2,29 @@
 import React, { useState } from 'react';
 import getWeatherData from '../../services/getWeatherData';
 import Loading from '../loading/Loading';
+import Error from '../error/Error';
+import Card from '../card/Card';
 import './forecast.scss';
 
 const Forecast = () => {
   const [searchText, setSearchText] = useState('');
   const [measure, setMeasure] = useState('celsius');
-  const [weatherData, setWeatherData] = useState({});
+  const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const onBtnClick = async (e) => {
     e.preventDefault();
+
     if (searchText) {
       try {
         setError(false);
         setLoading(true);
+
         const answer = await getWeatherData(searchText, measure);
-        // console.log(answer);
         if (answer.cod === '200') {
-          const {
-            list: [currentData],
-          } = answer;
-          setWeatherData(currentData);
+          const { list } = answer;
+          setWeatherData(list.slice(0, 10));
           // setSearchText('');
         } else {
           throw new Error('city not found');
@@ -47,18 +48,17 @@ const Forecast = () => {
   let content;
 
   if (error) {
-    content = searchText === '' ? 'Enter the name of the locality' : 'Error';
-  }
-
-  if (loading) {
-    content = <Loading />;
-  }
-
-  if (!error && !loading) {
     content =
-      JSON.stringify(weatherData) === '{}'
-        ? ''
-        : `temp - ${weatherData.main.temp}, feels like - ${weatherData.main.feels_like}`;
+      searchText === '' ? (
+        <Error text="Enter the name of the locality" />
+      ) : (
+        <Error text="City not found" />
+      );
+  } else if (loading) {
+    content = <Loading />;
+  } else {
+    content =
+      JSON.stringify(weatherData) === '{}' ? '' : <Card data={weatherData} />;
   }
 
   return (
@@ -117,7 +117,7 @@ const Forecast = () => {
             </label>
           </div>
         </form>
-        <div className="forecast__result">{content}</div>
+        <div className="forecast__cards">{content}</div>
       </div>
     </div>
   );

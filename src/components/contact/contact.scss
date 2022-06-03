@@ -5,6 +5,10 @@
   &__elem {
 		&:not(:last-child) {
 			margin: 0 15px 0 0;
+
+			@media (min-width: 768px) {
+				margin: 0 25px 0 0;
+			}
 		}
   }
 
@@ -16,6 +20,11 @@
 
 			&:hover {
 				transform: scale(1.3);
+			}
+
+			@media (min-width: 768px) {
+				width: 40px;
+				height: 40px;
 			}
     }
   }
