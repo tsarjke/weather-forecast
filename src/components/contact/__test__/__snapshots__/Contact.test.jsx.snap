@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact should render this component without any mistakes 1`] = `
+<ul
+  class="contact-list"
+  data-testid="contact"
+>
+  <li
+    class="contact-list__elem"
+  >
+    <a
+      class="contact-list__link"
+      href="https://github.com/tsarjke"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <svg>
+        github.svg
+      </svg>
+    </a>
+  </li>
+  <li
+    class="contact-list__elem"
+  >
+    <a
+      class="contact-list__link"
+      href="https://t.me/tsarjke"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <svg>
+        telegram2.svg
+      </svg>
+    </a>
+  </li>
+  <li
+    class="contact-list__elem"
+  >
+    <a
+      class="contact-list__link"
+      href="https://www.linkedin.com/in/tsarev-ivan/"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <svg>
+        linkedin2.svg
+      </svg>
+    </a>
+  </li>
+  <li
+    class="contact-list__elem"
+  >
+    <a
+      class="contact-list__link"
+      href="mailto:ivantsarb@gmail.com"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <svg>
+        gmail2.svg
+      </svg>
+    </a>
+  </li>
+</ul>
+`;

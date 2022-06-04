@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Forecast should render form and empty div for content 1`] = `
+<div
+  class="forecast"
+  data-testid="forecast"
+>
+  <div
+    class="forecast__content"
+  >
+    <form
+      action="#"
+      class="forecast__form"
+      data-testid="forecast-form"
+    >
+      <div
+        class="search"
+      >
+        <input
+          class="search__text-input"
+          data-testid="search-input"
+          name="city"
+          type="text"
+          value=""
+        />
+        <button
+          class="search__btn"
+          data-testid="search-btn"
+          type="submit"
+        >
+          Search
+        </button>
+      </div>
+      <div
+        class="switcher"
+      >
+        <div
+          class="switcher__content"
+        >
+          <label
+            class="switcher__label"
+            for="celsius"
+          >
+            <input
+              checked=""
+              class="switcher__radio"
+              data-testid="celsius-btn"
+              id="celsius"
+              name="measure"
+              type="radio"
+              value="celsius"
+            />
+            <span>
+              Celsius
+            </span>
+          </label>
+          <label
+            class="switcher__label"
+            for="fahrenheit"
+          >
+            <input
+              class="switcher__radio"
+              data-testid="fahrenheit-btn"
+              id="fahrenheit"
+              name="measure"
+              type="radio"
+              value="fahrenheit"
+            />
+            <span>
+              Fahrenheit
+            </span>
+          </label>
+        </div>
+      </div>
+    </form>
+    <div
+      class="forecast__content"
+      data-testid="content"
+    />
+  </div>
+</div>
+`;

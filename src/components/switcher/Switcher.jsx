@@ -17,6 +17,7 @@ const Switcher = ({ handleChange, value }) => (
           id="celsius"
           value="celsius"
           checked={value === 'celsius'}
+          data-testid="celsius-btn"
         />
         <span>Celsius</span>
       </label>
@@ -32,6 +33,7 @@ const Switcher = ({ handleChange, value }) => (
           id="fahrenheit"
           value="fahrenheit"
           checked={value === 'fahrenheit'}
+          data-testid="fahrenheit-btn"
         />
         <span>Fahrenheit</span>
       </label>

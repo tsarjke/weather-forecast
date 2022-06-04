@@ -28,7 +28,14 @@ const Contact = () => {
     </li>
   ));
 
-  return <ul className="contact-list">{contactList}</ul>;
+  return (
+    <ul
+      className="contact-list"
+      data-testid="contact"
+    >
+      {contactList}
+    </ul>
+  );
 };
 
 export default Contact;

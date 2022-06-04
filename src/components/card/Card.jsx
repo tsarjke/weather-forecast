@@ -2,8 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './card.scss';
 
-const reqSvgs = require.context('./img', true, /\.svg$/);
-const svgs = reqSvgs.keys().map((path) => ({ path, file: reqSvgs(path) }));
+const reqSvgs =
+  process.env.NODE_ENV === 'test'
+    ? ''
+    : require.context('./img', true, /\.svg$/);
+const svgs =
+  process.env.NODE_ENV === 'test'
+    ? [{ path: '04n.svg', file: './img/test.svg' }]
+    : reqSvgs.keys().map((path) => ({ path, file: reqSvgs(path) }));
 
 const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 const months = [
@@ -57,14 +63,21 @@ const Card = ({ data, unit }) => {
           className={`card__weekday ${
             cureentDay === 0 || cureentDay === 6 ? 'card__weekday_r' : ''
           }`}
+          data-testid="weekday"
         >
           {days[cureentDay]}
         </h2>
-        <time className="card__time">{`${date.getHours()}:00 ${date.getDate()} ${months[date.getMonth()]}`}</time>
+        <time
+          className="card__time"
+          data-testid="time"
+        >
+          {`${date.getHours()}:00 ${date.getDate()} ${months[date.getMonth()]}`}
+        </time>
         <div className="card__icon">
           <img
             src={icon[0].file}
             alt={w.main}
+            data-testid="weather-icon"
           />
         </div>
         <p className="card__desc">{w.description}</p>
@@ -73,10 +86,16 @@ const Card = ({ data, unit }) => {
             className={`card__temp-real ${
               unit === 'celsius' ? 'card__temp-real_c' : 'card__temp-real_f'
             }`}
+            data-testid="temp"
           >
             {temp}
           </p>
-          <p className="card__feels-like">{`feels like ${feelsLike}`}</p>
+          <p
+            className="card__feels-like"
+            data-testid="feels-like"
+          >
+            {`feels like ${feelsLike}`}
+          </p>
         </div>
       </li>
     );

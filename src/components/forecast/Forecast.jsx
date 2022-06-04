@@ -27,10 +27,10 @@ const Forecast = () => {
           const { list } = answer;
           setWeatherData(list.slice(0, 10));
         } else {
-          throw new Error('city not found');
+          setError('City not found');
         }
       } catch {
-        setError(true);
+        setError('Something went wrong');
       } finally {
         setLoading(false);
       }
@@ -61,7 +61,7 @@ const Forecast = () => {
       searchText === '' ? (
         <Error text="Enter the name of the locality" />
       ) : (
-        <Error text="City not found" />
+        <Error text={error} />
       );
   } else if (loading) {
     content = <Loading />;
@@ -78,12 +78,16 @@ const Forecast = () => {
   }
 
   return (
-    <div className="forecast">
+    <div
+      className="forecast"
+      data-testid="forecast"
+    >
       <div className="forecast__content">
         <form
           onSubmit={onFormSubmit}
           action="#"
           className="forecast__form"
+          data-testid="forecast-form"
         >
           <SearchPanel
             handleChange={handleChange}
@@ -94,7 +98,12 @@ const Forecast = () => {
             value={measure}
           />
         </form>
-        <div className="forecast__content">{content}</div>
+        <div
+          className="forecast__content"
+          data-testid="content"
+        >
+          {content}
+        </div>
       </div>
     </div>
   );

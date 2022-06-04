@@ -2,7 +2,7 @@ import React from 'react';
 import './loading.scss';
 
 const Loading = () => (
-  <div className="loading">
+  <div className="loading" data-testid="loading">
     <svg
       width="300"
       height="120"

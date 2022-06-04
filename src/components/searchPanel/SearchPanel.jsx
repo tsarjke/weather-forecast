@@ -10,10 +10,12 @@ const SearchPanel = ({ handleChange, value }) => (
       className="search__text-input"
       type="text"
       name="city"
+      data-testid="search-input"
     />
     <button
       className="search__btn"
       type="submit"
+      data-testid="search-btn"
     >
       Search
     </button>

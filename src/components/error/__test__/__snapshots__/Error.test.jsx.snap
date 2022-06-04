@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error should render this component with the props text 1`] = `
+<div
+  class="error"
+  data-testid="error"
+>
+  <div
+    class="error__content"
+  >
+    <h2
+      class="error__title"
+    >
+      Error!
+    </h2>
+    <p
+      class="error__text"
+    >
+      test error
+    </p>
+  </div>
+</div>
+`;
