@@ -1,0 +1,41 @@
+.switcher {
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__label {
+    span {
+      display: block;
+      border: 1px solid #ca3434;
+      user-select: none;
+      cursor: pointer;
+      padding: 5px;
+      color: #ca3434;
+      font-size: 1.2rem;
+
+      @media (min-width: 768px) {
+        font-size: 1.5rem;
+        border-width: 2px;
+        padding: 5px 8px;
+      }
+
+      @media (min-width: 1440px) {
+        font-size: 1.9rem;
+        padding: 8px 10px;
+      }
+    }
+
+    input {
+      display: none;
+
+      &:checked + span {
+        color: #2a9468;
+        font-weight: bold;
+        border-color: #2a9468;
+        border-width: 2px;
+      }
+    }
+  }
+}

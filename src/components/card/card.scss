@@ -9,92 +9,84 @@
     background-color: #7291e4;
     border-radius: 5px;
     margin: 0 2% 10px 0;
-		border: 1px solid #1b198f;
+    border: 1px solid #1b198f;
 
-		@media (min-width: 768px) {
-			width: 30%;
-			margin: 0 3.33% 20px 0;
-		}
+    @media (min-width: 768px) {
+      width: 30%;
+      margin: 0 3.33% 20px 0;
+    }
 
-		@media (min-width: 1024px) {
-			width: 23%;
-			margin: 0 2% 20px 0;
-		}
+    @media (min-width: 1024px) {
+      width: 23%;
+      margin: 0 2% 20px 0;
+    }
   }
 
   &__weekday {
     font-size: 1.3rem;
-		margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
 
     &_r {
       color: #f00;
     }
 
-		@media (min-width: 440px) {
-			font-size: 1.4rem;
-		}
+    @media (min-width: 440px) {
+      font-size: 1.4rem;
+    }
 
-		@media (min-width: 768px) {
-			font-size: 1.5rem;
-		}
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+    }
 
-		@media (min-width: 1440px) {
-			font-size: 1.7rem;
-		}
-  }
-
-  &__date {
-    display: flex;
-		margin: 0 0 5px 0;
-
-		@media (min-width: 440px) {
-			font-size: 1rem;
-		}
-
-		@media (min-width: 1440px) {
-			font-size: 1.2rem;
-		}
+    @media (min-width: 1440px) {
+      font-size: 1.7rem;
+    }
   }
 
   &__time {
-    margin: 0 5px 0 0;
-  }
+    margin: 0 0 5px 0;
 
-  &__date-month {
+    @media (min-width: 440px) {
+      font-size: 1rem;
+    }
+
+    @media (min-width: 1440px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__icon {
-		margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
     img {
-			display: block;
+      display: block;
       max-width: 80%;
-			margin: 0 auto;
+      margin: 0 auto;
 
-			@media (min-width: 768px) {
-				width: 70%;
-			}
+      @media (min-width: 768px) {
+        width: 70%;
+      }
 
-			@media (min-width: 1024px) {
-				width: 60%;
-			}
+      @media (min-width: 1024px) {
+        width: 60%;
+      }
 
-			@media (min-width: 1440px) {
-				width: 50%;
-			}
+      @media (min-width: 1440px) {
+        width: 50%;
+      }
     }
   }
 
   &__desc {
     text-align: center;
-		margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
 
-		@media (min-width: 440px) {
-			font-size: 1rem;
-		}
+    @media (min-width: 440px) {
+      font-size: 1rem;
+    }
 
-		@media (min-width: 1440px) {
-			font-size: 1.2rem;
-		}
+    @media (min-width: 1440px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__temp {
@@ -103,30 +95,55 @@
 
   &__temp-real {
     font-size: 1.6rem;
-		margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
 
-		@media (min-width: 440px) {
-			font-size: 1.8rem;
+		&_f:after {
+			content: '°F';
 		}
 
-		@media (min-width: 768px) {
-			font-size: 1.9rem;
+		&_c:after {
+			content: '°C';
 		}
 
-		@media (min-width: 768px) {
-			font-size: 2.1rem;
+		&:after {
+			margin: 0 0 0 2px;
+			font-size: 1.2rem;
 		}
+
+    @media (min-width: 440px) {
+      font-size: 1.8rem;
+
+			&:after {
+				font-size: 1.4rem;
+			}
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.9rem;
+
+			&:after {
+				font-size: 1.6rem;
+			}
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 2.1rem;
+
+			&:after {
+				font-size: 1.8rem;
+			}
+    }
   }
 
   &__feels-like {
     color: #555;
 
-		@media (min-width: 440px) {
-			font-size: 1rem;
-		}
+    @media (min-width: 440px) {
+      font-size: 1rem;
+    }
 
-		@media (min-width: 1440px) {
-			font-size: 1.2rem;
-		}
+    @media (min-width: 1440px) {
+      font-size: 1.2rem;
+    }
   }
 }

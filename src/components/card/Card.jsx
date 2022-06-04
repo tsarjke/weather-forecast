@@ -31,7 +31,7 @@ const addSign = (val) => {
   return temp;
 };
 
-const Card = ({ data }) => {
+const Card = ({ data, unit }) => {
   const tempArr = data.map((el) => {
     const {
       dt,
@@ -60,10 +60,7 @@ const Card = ({ data }) => {
         >
           {days[cureentDay]}
         </h2>
-        <div className="card__date">
-          <h4 className="card__time">{`${date.getHours()}:00`}</h4>
-          <h4 className="card__date-month">{`${date.getDate()} ${months[date.getMonth()]}`}</h4>
-        </div>
+        <time className="card__time">{`${date.getHours()}:00 ${date.getDate()} ${months[date.getMonth()]}`}</time>
         <div className="card__icon">
           <img
             src={icon[0].file}
@@ -72,7 +69,13 @@ const Card = ({ data }) => {
         </div>
         <p className="card__desc">{w.description}</p>
         <div className="card__temp">
-          <p className="card__temp-real">{temp}</p>
+          <p
+            className={`card__temp-real ${
+              unit === 'celsius' ? 'card__temp-real_c' : 'card__temp-real_f'
+            }`}
+          >
+            {temp}
+          </p>
           <p className="card__feels-like">{`feels like ${feelsLike}`}</p>
         </div>
       </li>
@@ -84,6 +87,11 @@ const Card = ({ data }) => {
 
 Card.propTypes = {
   data: PropTypes.oneOfType([PropTypes.array]).isRequired,
+  unit: PropTypes.string,
+};
+
+Card.defaultProps = {
+  unit: 'celsius',
 };
 
 export default Card;

@@ -1,10 +1,11 @@
-/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import getWeatherData from '../../services/getWeatherData';
 import Loading from '../loading/Loading';
 import Error from '../error/Error';
 import Card from '../card/Card';
 import './forecast.scss';
+import SearchPanel from '../searchPanel/SearchPanel';
+import Switcher from '../switcher/Switcher';
 
 const Forecast = () => {
   const [searchText, setSearchText] = useState('');
@@ -13,7 +14,7 @@ const Forecast = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const onBtnClick = async (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
 
     if (searchText) {
@@ -25,7 +26,6 @@ const Forecast = () => {
         if (answer.cod === '200') {
           const { list } = answer;
           setWeatherData(list.slice(0, 10));
-          // setSearchText('');
         } else {
           throw new Error('city not found');
         }
@@ -39,13 +39,22 @@ const Forecast = () => {
     }
   };
 
-  const handleChange = (e) => {
-    setError(false);
-    e.target.type === 'text' && setSearchText(e.target.value);
-    e.target.type === 'radio' && setMeasure(e.target.value);
-  };
-
   let content;
+
+  const handleChange = ({ target }) => {
+    setError(false);
+
+    if (target.type === 'text') {
+      setSearchText(target.value);
+    }
+    if (target.type === 'radio') {
+      setMeasure(target.value);
+    }
+
+    if (weatherData.length > 0) {
+      setWeatherData([]);
+    }
+  };
 
   if (error) {
     content =
@@ -58,66 +67,34 @@ const Forecast = () => {
     content = <Loading />;
   } else {
     content =
-      JSON.stringify(weatherData) === '{}' ? '' : <Card data={weatherData} />;
+      weatherData.length === 0 ? (
+        ''
+      ) : (
+        <Card
+          data={weatherData}
+          unit={measure}
+        />
+      );
   }
 
   return (
     <div className="forecast">
       <div className="forecast__content">
         <form
+          onSubmit={onFormSubmit}
           action="#"
-          className="forecast__form form"
+          className="forecast__form"
         >
-          <div className="form__search-panel">
-            <input
-              onChange={handleChange}
-              value={searchText}
-              className="form__text"
-              type="text"
-              name="city"
-            />
-            <button
-              onClick={onBtnClick}
-              className="form__btn"
-              type="submit"
-            >
-              Search
-            </button>
-          </div>
-          <div className="form__measure">
-            <label
-              className="form__label"
-              htmlFor="celsius"
-            >
-              <input
-                onChange={handleChange}
-                className="form__radio"
-                type="radio"
-                name="measure"
-                id="celsius"
-                value="celsius"
-                checked={measure === 'celsius'}
-              />
-              <span>Celsius</span>
-            </label>
-            <label
-              className="form__label"
-              htmlFor="fahrenheit"
-            >
-              <input
-                onChange={handleChange}
-                className="form__radio"
-                type="radio"
-                name="measure"
-                id="fahrenheit"
-                value="fahrenheit"
-                checked={measure === 'fahrenheit'}
-              />
-              <span>Fahrenheit</span>
-            </label>
-          </div>
+          <SearchPanel
+            handleChange={handleChange}
+            value={searchText}
+          />
+          <Switcher
+            handleChange={handleChange}
+            value={measure}
+          />
         </form>
-        <div className="forecast__cards">{content}</div>
+        <div className="forecast__content">{content}</div>
       </div>
     </div>
   );
