@@ -40,7 +40,7 @@ describe('Switcher', () => {
     render(<Switcher handleChange={handleChange} />);
 
     const fahrenheitRadioBtn = screen.getByTestId('fahrenheit-btn');
-		fireEvent.click(fahrenheitRadioBtn);
+    fireEvent.click(fahrenheitRadioBtn);
     expect(handleChange).toBeCalled();
   });
 });

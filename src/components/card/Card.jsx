@@ -32,7 +32,7 @@ const addSign = (val) => {
   if (val > 0) {
     temp = `+${val}`;
   } else if (val < 0) {
-    temp = `-${val}`;
+    temp = val;
   }
   return temp;
 };
