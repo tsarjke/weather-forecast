@@ -50,6 +50,26 @@ describe('Forecast', () => {
     expect(mockGetWeatherData).toHaveBeenCalledTimes(1);
   });
 
+  test('Should show the Error component with "It is impossible to get the data, contact the copyright holder" when access denied (403)', async () => {
+    mockGetWeatherData.mockResolvedValue({ message: 'problem' });
+    render(<Forecast />);
+
+    const searchInput = screen.getByTestId('search-input');
+    fireEvent.change(searchInput, { target: { value: 'San-francisco' } });
+
+    await act(async () => {
+      const forecastForm = screen.getByTestId('forecast-form');
+      fireEvent.submit(forecastForm);
+    });
+
+    expect(
+      screen.getByText(
+        'It is impossible to get the data, contact the copyright holder',
+      ),
+    ).toBeInTheDocument();
+    expect(mockGetWeatherData).toHaveBeenCalledTimes(1);
+  });
+
   test('Should show the Error component with "Something went wrong" when a rejection is received', async () => {
     mockGetWeatherData.mockRejectedValue();
     render(<Forecast />);

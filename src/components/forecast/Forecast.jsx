@@ -26,8 +26,10 @@ const Forecast = () => {
         if (answer.cod === '200') {
           const { list } = answer;
           setWeatherData(list.slice(0, 10));
-        } else {
+        } else if (answer.cod === '404') {
           setError('City not found');
+        } else {
+          setError('It is impossible to get the data, contact the copyright holder');
         }
       } catch {
         setError('Something went wrong');
