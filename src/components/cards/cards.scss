@@ -1,9 +1,9 @@
-.card {
+.cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
-  &__list {
+  &__elem {
     width: 48%;
     padding: 10px;
     background-color: #7291e4;

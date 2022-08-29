@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import getWeatherData from '../../services/getWeatherData';
+import getForecastData from '../../utils/getForecastData';
 import Loading from '../loading/Loading';
 import Error from '../error/Error';
-import Card from '../card/Card';
+import Cards from '../cards/Cards';
 import './forecast.scss';
 import SearchPanel from '../searchPanel/SearchPanel';
 import Switcher from '../switcher/Switcher';
@@ -22,14 +23,18 @@ const Forecast = () => {
         setError(false);
         setLoading(true);
 
-        const answer = await getWeatherData(searchText, measure);
-        if (answer.cod === '200') {
-          const { list } = answer;
-          setWeatherData(list.slice(0, 10));
-        } else if (answer.cod === '404') {
+        const answer = await getWeatherData(searchText);
+        if (answer.forecast) {
+          const {
+            forecast: { forecastday },
+          } = answer;
+          setWeatherData(getForecastData(forecastday));
+        } else if (answer.error) {
           setError('City not found');
         } else {
-          setError('It is impossible to get the data, contact the copyright holder');
+          setError(
+            'It is impossible to get the data, contact the copyright holder',
+          );
         }
       } catch {
         setError('Something went wrong');
@@ -48,13 +53,12 @@ const Forecast = () => {
 
     if (target.type === 'text') {
       setSearchText(target.value);
+      if (weatherData.length > 0) {
+        setWeatherData([]);
+      }
     }
     if (target.type === 'radio') {
       setMeasure(target.value);
-    }
-
-    if (weatherData.length > 0) {
-      setWeatherData([]);
     }
   };
 
@@ -72,7 +76,7 @@ const Forecast = () => {
       weatherData.length === 0 ? (
         ''
       ) : (
-        <Card
+        <Cards
           data={weatherData}
           unit={measure}
         />

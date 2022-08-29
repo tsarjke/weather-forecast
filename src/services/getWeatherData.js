@@ -1,19 +1,18 @@
-const getWeatherData = async (city, measure = 'celsius') => {
+const getWeatherData = async (city) => {
   if (city) {
     const options = {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com',
         'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
       },
     };
 
-    const units = measure !== 'celsius' ? 'imperial' : 'metric';
     const q = encodeURI(city.toLowerCase().replace('-', ' '));
 
     try {
       const response = await fetch(
-        `https://community-open-weather-map.p.rapidapi.com/forecast?q=${q}&units=${units}`,
+        `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${q}&days=3`,
         options,
       );
       if (response) {

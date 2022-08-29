@@ -5,16 +5,27 @@ import mockGetWeatherData from '../../../services/getWeatherData';
 
 jest.mock('../../../services/getWeatherData.js');
 
-const testData = [
-  {
-    dt: 100000,
-    weather: [{ icon: '04n', main: 'Clouds', description: 'overcast clouds' }],
-    main: {
-      temp: 14,
-      feels_like: 13,
-    },
+const testData = {
+  time: '2022-08-29 00:00',
+  condition: {
+    icon: '//cdn.weatherapi.com/weather/64x64/night/116.png',
+    text: 'Partly cloudy',
   },
-];
+  temp_c: 14,
+  feelslike_c: 13,
+  temp_f: 14,
+  feelslike_f: 13,
+};
+
+const mockTestData = {
+  forecast: {
+    forecastday: [
+      {
+        hour: [{ ...testData, time_epoch: Infinity }],
+      },
+    ],
+  },
+};
 
 describe('Forecast', () => {
   test('should render form and empty div for content', () => {
@@ -35,7 +46,9 @@ describe('Forecast', () => {
   });
 
   test('Should show the Error component with "City not found" when the 404 cod is received', async () => {
-    mockGetWeatherData.mockResolvedValue({ cod: '404' });
+    mockGetWeatherData.mockResolvedValue({
+      error: { code: 1006, message: 'No matching location found.' },
+    });
     render(<Forecast />);
 
     const searchInput = screen.getByTestId('search-input');
@@ -86,7 +99,7 @@ describe('Forecast', () => {
     expect(mockGetWeatherData).toHaveBeenCalledTimes(1);
   });
 
-  test('Should show the Error component with "Something went wrong" when there was no list in the response', async () => {
+  test('Should show the Error component with "It is impossible to get the data, contact the copyright holder" when there was no data in the response', async () => {
     mockGetWeatherData.mockResolvedValue({ cod: '200' });
     render(<Forecast />);
 
@@ -98,12 +111,16 @@ describe('Forecast', () => {
       fireEvent.submit(forecastForm);
     });
 
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'It is impossible to get the data, contact the copyright holder',
+      ),
+    ).toBeInTheDocument();
     expect(mockGetWeatherData).toHaveBeenCalledTimes(1);
   });
 
   test('Should render the test card and delete it after changing in search input', async () => {
-    mockGetWeatherData.mockResolvedValue({ cod: '200', list: testData });
+    mockGetWeatherData.mockResolvedValue(mockTestData);
     render(<Forecast />);
 
     const searchInput = screen.getByTestId('search-input');
@@ -114,26 +131,8 @@ describe('Forecast', () => {
       fireEvent.submit(forecastForm);
     });
 
-    expect(screen.queryByText('overcast clouds')).toBeInTheDocument();
+    expect(screen.queryByText('Partly cloudy')).toBeInTheDocument();
     fireEvent.change(searchInput, { target: { value: 'Phoenix' } });
-    expect(screen.queryByText('overcast clouds')).not.toBeInTheDocument();
-  });
-
-  test('Should render the test card and delete it after changing radio button with the unit', async () => {
-    mockGetWeatherData.mockResolvedValue({ cod: '200', list: testData });
-    render(<Forecast />);
-
-    const searchInput = screen.getByTestId('search-input');
-    fireEvent.change(searchInput, { target: { value: 'San-francisco' } });
-
-    await act(async () => {
-      const forecastForm = screen.getByTestId('forecast-form');
-      fireEvent.submit(forecastForm);
-    });
-
-    expect(screen.queryByText('overcast clouds')).toBeInTheDocument();
-    const fahrenheitRadioBtn = screen.getByTestId('fahrenheit-btn');
-    fireEvent.click(fahrenheitRadioBtn);
-    expect(screen.queryByText('overcast clouds')).not.toBeInTheDocument();
+    expect(screen.queryByText('Partly cloudy')).not.toBeInTheDocument();
   });
 });
